@@ -1,0 +1,59 @@
+[
+  {
+<<<<<<< HEAD
+    "name": "Stussy Panyss",
+    "description": "Purchasada",
+    "price": "99.00",
+    "size": "Available in size XS, S , M, L, XL, XXL",
+    "id": "1730364121479287"
+  },
+  {
+    "name": "New Product for testing",
+    "description": "This is for testing only",
+    "price": "1288.00",
+    "size": "XS, M",
+    "id": "1730365412715080"
+  },
+  {
+    "name": "New Product for testing",
+    "description": "This is for testing only",
+    "price": "1288.00",
+    "size": "XS, M",
+    "id": "1730365436750400"
+  },
+  {
+    "name": "ASD",
+    "description": "fweew",
+    "price": "45.00",
+    "size": "wefwe",
+    "id": "1730365503774440"
+  },
+  {
+    "name": "test",
+    "description": "test",
+    "price": "44.00",
+    "size": "test",
+    "id": "1730365619536685"
+  },
+  {
+    "name": "testtt",
+    "description": "788",
+    "price": "67.00",
+    "size": "54e7",
+    "id": "1730365740917092"
+=======
+    "name": "Andy the skibidi",
+    "price": "1288.00",
+    "description": "Skibidi",
+    "size": "XS",
+    "image": "images/1730437968229.png"
+  },
+  {
+    "name": "upload",
+    "price": "78.00",
+    "description": "665",
+    "size": "7",
+    "image": "images/1730438194470.png"
+>>>>>>> a1da2ae (Initial commit with upload and homepage files)
+  }
+]
