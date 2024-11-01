@@ -3,17 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foundry Product Upload</title>
+    <title>Foundry Homepage</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
 </head>
-<body>
-
-
-    <title>Foundry Homepage</title>
-    <link rel="stylesheet" href="css/index.css">
-</head>
-<body>
+<body onload="getProducts()">
     <!-- Header Section -->
     <header class="header">
         <input type="text" placeholder="Search..." class="search-bar">
@@ -24,26 +18,16 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
+        <!-- Optional: Add content or background image for hero section here -->
     </section>
 
-    <!-- Product Listing Section -->
-    <section class="product-listing">
-        <div class="products-grid">
-            <!-- Example Product Items - This section will be dynamically generated in a real application -->
-            <div class="product-item">
-                <img src="images/jeans.png" alt="Product Image">
-                <p>SUMMER 2024 WINTER PANT</p>
-                <p>$99.00</p>
-            </div>
-            <div class="product-item">
-                <img src="images/jeans.png" alt="Product Image">
-                <p>SUMMER 2024 WINTER PANT</p>
-                <p>$99.00</p>
-            </div>
-            <!-- Repeat as needed for more products -->
+    <!-- Product Section with Grid Layout -->
+    <section class="product-section">
+        <div class="product-grid" id="productGrid">
+            <!-- Products will be dynamically added here by JavaScript -->
         </div>
     </section>
 
-    <script src="js/product.js"></script>
+    <script src="js/get.js"></script>
 </body>
 </html>

@@ -24,10 +24,11 @@ app.use(bodyParser.json());
 app.use(express.static("./public"));
 
 // Import addProduct function
-const { addProduct } = require('./utils/ProductUtil');
+const { addProduct, getProducts } = require('./utils/ProductUtil');
 
 // Adjust the POST route to handle file uploads
 app.post('/add-product', upload.single('image'), addProduct);
+app.get('/get-products', getProducts);
 
 // Default route
 app.get('/', (req, res) => {

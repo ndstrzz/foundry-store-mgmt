@@ -17,7 +17,7 @@ body, html {
 .header {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center-aligns all elements */
+    justify-content: center;
     padding: 20px;
     position: fixed;
     top: 0;
@@ -52,61 +52,47 @@ body, html {
     overflow: hidden;
 }
 
-/* Remove the black line overlay */
-.hero-content {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    text-align: center;
-    color: white;
-    padding: 20px;
-}
-
-.hero-content h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.hero-content p {
-    font-size: 16px;
-}
-
-
-/* Product Listing Section */
-.product-listing {
-    padding: 20px;
-    margin-top: 60vh; /* Pushes product grid below the hero section */
-    display: flex;
-    justify-content: center;
-}
-
-.products-grid {
+/* Product Grid Layout */
+.product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Larger min-width */
     gap: 20px;
-    width: 90%;
+    padding: 20px;
+    margin-top: 20px; /* Adjust margin to avoid overlap with fixed header */
 }
 
-.product-item {
-    background-color: #f9f9f9;
-    padding: 15px;
-    text-align: center;
+/* Product Card */
+.product-card {
     border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
     transition: transform 0.3s;
 }
 
-.product-item img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-.product-item p {
-    margin: 5px 0;
-}
-
-.product-item:hover {
+.product-card:hover {
     transform: scale(1.05);
+}
+
+.product-card img {
+    width: 100%; /* Ensure it covers the card width */
+    height: 300px; /* Fixed height for uniform sizing */
+    object-fit: cover; /* Ensures images are cropped to fit */
+    border-radius: 4px;
+}
+
+.product-name {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-top: 10px;
+    color: #333;
+}
+
+.product-price {
+    color: #555;
+    font-size: 1em;
+    margin-top: 5px;
 }

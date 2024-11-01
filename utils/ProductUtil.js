@@ -41,7 +41,7 @@ async function addProduct(req, res) {
             console.log("Validation Error: Name is required");
             return res.status(400).json({ message: 'Name is required' });
         }
-        
+
         if (!price || isNaN(price) || price <= 0) {
             console.log("Validation Error: Invalid price");
             return res.status(400).json({ message: 'Price must be a positive number and formatted to two decimal places' });
@@ -80,8 +80,18 @@ async function addProduct(req, res) {
     }
 }
 
+async function getProducts(req, res) {
+    try {
+        const allProducts = await readJSON('utils/products.json');
+        return res.status(201).json(allProducts);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
+
 module.exports = {
     readJSON,
     writeJSON,
-    addProduct
+    addProduct,
+    getProducts
 };
