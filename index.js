@@ -23,14 +23,30 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
 
-// Import addProduct function
-const { addProduct, getProducts } = require('./utils/ProductUtil');
+// Import functions from ProductUtil.js
+const { addProduct, getProducts, readJSON } = require('./utils/ProductUtil');
 
-// Adjust the POST route to handle file uploads
+// Adjust the POST route to handle file uploads for adding products
 app.post('/add-product', upload.single('image'), addProduct);
 app.get('/get-products', getProducts);
 
-// Default route
+// Endpoint to get individual product details by ID
+app.get('/get-product', async (req, res) => {
+    const productId = req.query.id;
+    try {
+        const products = await readJSON('utils/products.json');
+        const product = products.find(p => p.id === productId);
+        if (product) {
+            res.json(product);
+        } else {
+            res.status(404).json({ message: 'Product not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Default route to serve the homepage
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
 });
