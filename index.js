@@ -23,10 +23,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
 
-// Import functions from ProductUtil.js
+// Import functions from ProductUtil.js and ReviewUtil.js
 const { addProduct, getProducts, readJSON } = require('./utils/ProductUtil');
+const Review = require('./utils/ReviewUtil');
 
-// Adjust the POST route to handle file uploads for adding products
+// Product routes
 app.post('/add-product', upload.single('image'), addProduct);
 app.get('/get-products', getProducts);
 
@@ -44,6 +45,28 @@ app.get('/get-product', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+});
+
+// Review routes
+
+// GET route to fetch all reviews for a specific product
+app.get('/api/reviews/:productId', (req, res) => {
+    const productId = parseInt(req.params.productId);
+    const productReviews = Review.getReviewsByProductId(productId);
+    res.json(productReviews);
+});
+
+// POST route to add a new review for a specific product
+app.post('/api/reviews/:productId', (req, res) => {
+    const productId = parseInt(req.params.productId);
+    const newReview = new Review(
+        Date.now(), // Use current timestamp as a unique ID
+        productId,
+        req.body.review
+    );
+
+    newReview.save();
+    res.status(201).json(newReview);
 });
 
 // Default route to serve the homepage
