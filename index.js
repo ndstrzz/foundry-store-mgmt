@@ -24,11 +24,12 @@ app.use(bodyParser.json());
 app.use(express.static("./public"));
 
 // Import functions from ProductUtil.js
-const { addProduct, getProducts, readJSON } = require('./utils/ProductUtil');
+const { addProduct, getProducts, editProduct, readJSON } = require('./utils/ProductUtil');
 
 // Adjust the POST route to handle file uploads for adding products
 app.post('/add-product', upload.single('image'), addProduct);
 app.get('/get-products', getProducts);
+app.put('/edit-product/:id', upload.single('image'), editProduct);
 
 // Endpoint to get individual product details by ID
 app.get('/get-product', async (req, res) => {
