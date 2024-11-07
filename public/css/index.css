@@ -32,6 +32,7 @@ body, html {
     font-size: 16px;
     border-radius: 8px;
     border: 1px solid #ccc;
+    position: relative;
 }
 
 /* Position the upload icon to the right side of the header */
@@ -42,6 +43,43 @@ body, html {
     width: 40px;
     height: 40px;
     cursor: pointer;
+}
+
+/* Search Results Styling */
+.search-results {
+    display: none;
+    position: absolute;
+    top: 60px; /* Space below search bar */
+    width: 300px; /* Same width as search bar */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.search-result-item:hover {
+    background-color: #f0f0f0;
+}
+
+.result-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+.result-name {
+    font-size: 16px;
+    color: #333;
 }
 
 /* Hero Section */
