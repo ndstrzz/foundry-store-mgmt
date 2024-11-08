@@ -10,7 +10,8 @@
 <body onload="getProducts()">
     <!-- Header Section -->
     <header class="header">
-        <input type="text" placeholder="Search..." class="search-bar">
+        <input type="text" placeholder="Search..." class="search-bar" oninput="searchProducts(this.value)">
+        <div class="search-results" id="searchResults"></div> <!-- Container for search results -->
         <a href="upload.html">
             <img src="images/product-icon.png" alt="Upload Icon" class="upload-icon">
         </a>
@@ -28,6 +29,8 @@
         </div>
     </section>
 
+    <!-- Ensure get.js is loaded at the end of the body -->
     <script src="js/get.js"></script>
+    <script src="js/search_bar.js"></script>
 </body>
 </html>

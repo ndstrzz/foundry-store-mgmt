@@ -24,12 +24,13 @@ app.use(bodyParser.json());
 app.use(express.static("./public"));
 
 // Import functions from ProductUtil.js and ReviewUtil.js
-const { addProduct, getProducts, readJSON } = require('./utils/ProductUtil');
+const { addProduct, getProducts, editProduct, readJSON } = require('./utils/ProductUtil');
 const Review = require('./utils/ReviewUtil');
 
 // Product routes
 app.post('/add-product', upload.single('image'), addProduct);
 app.get('/get-products', getProducts);
+app.put('/edit-product/:id', upload.single('image'), editProduct);
 
 // Endpoint to get individual product details by ID
 app.get('/get-product', async (req, res) => {

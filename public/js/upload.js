@@ -15,13 +15,14 @@ function addProduct() {
         alert("Please select an image for the product.");
         return;
     }
-
+    
     const formData = new FormData();
     formData.append("name", document.getElementById("name").value);
     formData.append("price", parseFloat(document.getElementById("price").value).toFixed(2));
     formData.append("description", document.getElementById("description").value);
     formData.append("size", document.getElementById("size").value);
     formData.append("image", imageFile);
+    console.log(formData);
 
     const request = new XMLHttpRequest();
     request.open("POST", "/add-product", true);
