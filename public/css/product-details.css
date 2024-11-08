@@ -123,3 +123,73 @@ h3 {
     font-size: 16px;
     cursor: pointer;
 }
+
+/* Making the main review container significantly wider */
+.review-page-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 65%;
+    width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden; /* Ensure child elements stay within the box */
+}
+
+/* Making the reviews section scrollable */
+#reviewsContainer {
+    max-height: 230px; /* Fixed height to make it scrollable */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    padding: 10px;
+    background-color: transparent;
+}
+
+/* Styling for individual reviews */
+.reviews-container .review {
+    padding: 10px 0;
+    font-size: 16px;
+    line-height: 1.4;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Adjusting the review form section to stay within the main container */
+.review-form-section {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding is included within width */
+}
+
+/* Styling the form */
+#reviewForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Constrain the textarea to fit within the main container */
+#reviewText {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-sizing: border-box; /* Ensures padding does not exceed container */
+}
+
+/* Styling for the submit button */
+#reviewForm button {
+    align-self: flex-start;
+    padding: 5px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
