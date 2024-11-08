@@ -22,7 +22,7 @@ function getProductDetails() {
                         <hr>
                         <h3>Size & Fit</h3>
                         <p>${product.size}</p>
-                        <a href="edit-review.html?id=${product.id}" class="review-link">Review</a>
+                        <a href="reviews.html?id=${product.id}" class="review-link">Review</a> 
                         <div class="product-actions">
                             <button class="add-to-cart-btn">Add to cart</button>
                             <button class="checkout-btn">Checkout</button>
