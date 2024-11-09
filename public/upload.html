@@ -4,26 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Product - Foundry</title>
-    <link rel="stylesheet" href="css/upload.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <!-- Back Button -->
-    <a href="index.html" class="back-button">
+<body class="upload-body">
+    <a href="index.html" class="upload-back-button">
         <img src="images/back-icon.png" alt="Back Icon">
     </a>
 
-    <!-- Main Container for Upload Page -->
+    <!-- upload page container -->
     <div class="upload-container">
-        <!-- Left Section with Product Icon -->
+        <!-- Left Section containing product icon -->
         <div class="icon-section">
-            <!-- Image Upload Preview -->
             <label for="image-upload" style="cursor: pointer;">
                 <img src="images/product-icon.png" alt="Product Icon" class="product-icon" id="image-preview">
             </label>
             <input type="file" id="image-upload" style="display: none;" accept="image/*" onchange="previewImage(event)">
         </div>
         
-        <!-- Right Section with Form -->
+        <!-- right section containing form -->
         <div class="form-section">
             <h4>Product name</h4>
             <input type="text" id="name" class="form-control mb-3" placeholder="Enter product name">
@@ -41,7 +39,7 @@
         </div>
     </div>
 
-    <!-- Popup Notification -->
+    <!-- popup notification -->
     <div id="popup-notification" class="popup">
         <div class="popup-content">
             <p>Product uploaded successfully!</p>
@@ -49,6 +47,6 @@
         </div>
     </div>
 
-    <script src="js/upload.js"></script>
+    <script src="js/post-product.js"></script>
 </body>
 </html>

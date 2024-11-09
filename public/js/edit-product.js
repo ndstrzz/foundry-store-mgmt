@@ -11,7 +11,7 @@ function previewImage(event) {
 function getDataFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
-    // You can build the full `data` object here or use `id` directly.
+    // build full data object here or use id directly.
     return id;
 }
 
@@ -44,14 +44,13 @@ function getProduct(id) {
 
 function updateProduct() {
     const id = getDataFromURL();
-    console.log(id);
 
 
-    // Select the image file
+    // select image file
     const imageFile = document.getElementById("image-upload").files[0];
 
 
-    // Check for required fields
+    // check for required fields
     if (!document.getElementById("editName").value ||
         !document.getElementById("editPrice").value ||
         !document.getElementById("editDescription").value ||
@@ -63,7 +62,7 @@ function updateProduct() {
     }
 
 
-    // Create FormData and append fields
+    // create form data and append fields
     const formData = new FormData();
     formData.append("name", document.getElementById("editName").value);
     formData.append("price", parseFloat(document.getElementById("editPrice").value).toFixed(2));
@@ -78,7 +77,6 @@ function updateProduct() {
 
     const request = new XMLHttpRequest();
     request.open("PUT", "/edit-product/" + id, true);
-    // request.setRequestHeader("Content-Type", "application/json");
 
     request.onload = function () {
         try {
@@ -101,8 +99,6 @@ function updateProduct() {
         alert('An error occurred during the update. Please check your connection and try again.');
     };
 
-    // Send FormData instead of JSON
-    console.log(formData);
     request.send(formData);
 
 }

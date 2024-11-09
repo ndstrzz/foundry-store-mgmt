@@ -1,4 +1,5 @@
-let products = []; // Store products globally
+// store products globally
+let products = [];
 
 function getProducts() {
     var request = new XMLHttpRequest();
@@ -6,7 +7,7 @@ function getProducts() {
     request.setRequestHeader('Content-Type', 'application/json');
     request.onload = function () {
         products = JSON.parse(request.responseText);
-        displayProducts(products); // Display all products initially
+        displayProducts(products); // display all products
     };
     request.send();
 }
@@ -28,10 +29,10 @@ function displayProducts(productList) {
 
 function searchProducts(query) {
     const searchResults = document.getElementById('searchResults');
-    searchResults.innerHTML = ''; // Clear previous results
+    searchResults.innerHTML = ''; // clear previous results
 
     if (query.trim() === '') {
-        searchResults.style.display = 'none'; // Hide results if query is empty
+        searchResults.style.display = 'none'; // if query is empty, hide results
         return;
     }
 

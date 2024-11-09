@@ -4,47 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Product</title>
-    <link rel="stylesheet" href="css/upload.css">
-    <script src="js/product.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/edit-product.js"></script>
 </head>
-<body onload="loaded()"> <!-- Load product data on page load -->
+<body onload="loaded()"> <!-- load product data on page load -->
 
-    <!-- Back Button -->
     <a href="index.html" class="back-button">
         <img src="images/back-icon.png" alt="Back Icon">
     </a>
 
-    <!-- Main Container for Edit Page -->
-    <div class="upload-container">
-        <!-- Left Section with Product Icon -->
-        <div class="icon-section">
-            <label for="image-upload" style="cursor: pointer;">
-                <img src="images/product-icon.png" alt="Product Icon" class="product-icon" id="image-preview">
-            </label>
-            <input type="file" id="image-upload" style="display: none;" accept="image/*" onchange="previewImage(event)">
-        </div>
+    <!-- center container to hold upload-container in middle -->
+    <div class="center-container">
+        <!-- container for edit page -->
+        <div class="upload-container">
+            <!-- left section containing product icon -->
+            <div class="icon-section">
+                <label for="image-upload" style="cursor: pointer;">
+                    <img src="images/product-icon.png" alt="Product Icon" class="product-icon" id="image-preview">
+                </label>
+                <input type="file" id="image-upload" style="display: none;" accept="image/*" onchange="previewImage(event)">
+            </div>
 
-        <!-- Right Section with Form -->
-        <div class="form-section">
-            <h4>Product Name</h4>
-            <input type="text" id="editName" class="form-control mb-3" placeholder="Enter product name">
+            <!-- right section containing form -->
+            <div class="form-section">
+                <h4>Product Name</h4>
+                <input type="text" id="editName" class="form-control mb-3" placeholder="Enter product name">
 
-            <h4>Price</h4>
-            <input type="number" id="editPrice" class="form-control mb-3" placeholder="Enter product price">
+                <h4>Price</h4>
+                <input type="number" id="editPrice" class="form-control mb-3" placeholder="Enter product price">
 
-            <h4>Description</h4>
-            <textarea id="editDescription" class="form-control mb-3" placeholder="Enter product description" maxlength="250"></textarea>
+                <h4>Description</h4>
+                <textarea id="editDescription" class="form-control mb-3" placeholder="Enter product description" maxlength="250"></textarea>
 
-            <h4>Size & Fit</h4>
-            <input type="text" id="editSize" class="form-control mb-3" placeholder="Enter size and fit details" maxlength="50">
+                <h4>Size & Fit</h4>
+                <input type="text" id="editSize" class="form-control mb-3" placeholder="Enter size and fit details" maxlength="50">
 
-            <button type="button" class="btn upload-button" onclick="updateProduct()">Update</button>
-            <div id="editMessage">
+                <button type="button" class="btn upload-button" onclick="updateProduct()">Update</button>
+                <div id="editMessage"></div>
             </div>
         </div>
     </div>
 
-    <!-- Popup Notification -->
+    <!-- popup notification -->
     <div id="popup-notification" class="popup">
         <div class="popup-content">
             <p>Product updated successfully!</p>
@@ -52,7 +53,6 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
-    <script src="js/product.js"></script>
+    <script src="js/edit-product.js"></script>
 </body>
 </html>

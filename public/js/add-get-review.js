@@ -1,11 +1,11 @@
-// Get productId from URL
+// get product id from url
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id');
 
-// Set the back button link to point back to the product details page
+// back button link to go back to product details page
 document.getElementById('backButton').href = `product-details.html?id=${productId}`;
 
-// Function to get and display reviews
+// function to get and display reviews
 function getReviews() {
     const request = new XMLHttpRequest();
     request.open('GET', `/api/reviews/${productId}`, true);
@@ -15,7 +15,7 @@ function getReviews() {
         if (request.status === 200) {
             const reviews = JSON.parse(request.responseText);
             const reviewsContainer = document.getElementById('reviewsContainer');
-            reviewsContainer.innerHTML = ""; // Clear any existing reviews
+            reviewsContainer.innerHTML = ""; // clear input form for reviews
 
             reviews.forEach(review => {
                 const reviewElement = document.createElement('div');
@@ -35,20 +35,20 @@ function getReviews() {
     request.send();
 }
 
-// Handle form submission to post a new review
+// allow posting of new review
 document.getElementById('reviewForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
     let reviewText = document.getElementById('reviewText').value;
 
-    // Trim whitespace from both ends and remove empty lines
+    // trim whitespace from both ends and remove empty lines
     reviewText = reviewText
-        .split('\n')                      // Split into lines
-        .map(line => line.trim())          // Trim each line
-        .filter(line => line !== '')       // Remove empty lines
-        .join('\n');                       // Join lines back
+        .split('\n')                      // split into lines
+        .map(line => line.trim())          // trim each line
+        .filter(line => line !== '')       // remove empty lines
+        .join('\n');                       // join lines back
 
-    // Check if the review text is empty after cleanup
+    // check if review text is empty after cleanup
     if (reviewText === '') {
         alert('Your review cannot be empty or contain only spaces.');
         return;
@@ -61,8 +61,8 @@ document.getElementById('reviewForm').addEventListener('submit', function(event)
 
     request.onload = function () {
         if (request.status === 201) {
-            document.getElementById('reviewText').value = ''; // Clear form
-            getReviews(); // Refresh reviews
+            document.getElementById('reviewText').value = ''; // clear form
+            getReviews(); // refresh reviews
             alert('Your review has been submitted successfully!');
         } else {
             console.error('Error posting review:', request.statusText);
@@ -73,11 +73,10 @@ document.getElementById('reviewForm').addEventListener('submit', function(event)
         console.error('Network error while posting review.');
     };
 
-    // Send the cleaned-up review text
+    // send cleaned-up review text
     request.send(JSON.stringify({ review: reviewText }));
 });
 
 
-
-// Initialize by getting reviews only
+// display reviews on page load
 getReviews();

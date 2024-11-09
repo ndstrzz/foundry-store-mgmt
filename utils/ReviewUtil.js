@@ -1,37 +1,39 @@
-// Util/ReviewUtil.js
-
 const fs = require('fs');
 const path = require('path');
+const Review = require('../models/Reviews');
 
-class Review {
-    constructor(reviewId, productId, review) {
-        this.reviewId = reviewId;
-        this.productId = productId;
-        this.review = review;
-    }
+const REVIEW_FILE_PATH = path.join(__dirname, 'review.json');
 
-    // Method to load all reviews from review.json
-    static getAllReviews() {
-        const data = fs.readFileSync(path.join(__dirname, 'review.json'));
+// helper function used to load all reviews
+function getAllReviews() {
+    try {
+        const data = fs.readFileSync(REVIEW_FILE_PATH, 'utf8');
         return JSON.parse(data);
-    }
-
-    // Method to get reviews by productId
-    static getReviewsByProductId(productId) {
-        const reviews = this.getAllReviews();
-        return reviews.filter(review => review.productId === productId);
-    }
-
-    // Method to save a new review
-    save() {
-        const reviews = Review.getAllReviews();
-        reviews.push(this);
-
-        fs.writeFileSync(
-            path.join(__dirname, 'review.json'),
-            JSON.stringify(reviews, null, 2)
-        );
+    } catch (error) {
+        console.error("Error reading reviews from file:", error);
+        return [];
     }
 }
 
-module.exports = Review;
+// retrieve reviews by product id
+function getReviewsByProductId(productId) {
+    const reviews = getAllReviews();
+    return reviews.filter(review => review.productId === productId);
+}
+
+// saving new review to review.json
+function saveReview(review) {
+    try {
+        const reviews = getAllReviews();
+        reviews.push(review);
+        fs.writeFileSync(REVIEW_FILE_PATH, JSON.stringify(reviews, null, 2));
+    } catch (error) {
+        console.error("Error saving review:", error);
+    }
+}
+
+module.exports = {
+    getAllReviews,
+    getReviewsByProductId,
+    saveReview
+};
