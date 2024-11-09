@@ -1,4 +1,4 @@
-// Function to preview the selected image
+// function to preview selected image
 function previewImage(event) {
     const reader = new FileReader();
     reader.onload = function () {
@@ -22,8 +22,7 @@ function addProduct() {
     formData.append("description", document.getElementById("description").value);
     formData.append("size", document.getElementById("size").value);
     formData.append("image", imageFile);
-    console.log(formData);
-
+    
     const request = new XMLHttpRequest();
     request.open("POST", "/add-product", true);
 
@@ -32,9 +31,9 @@ function addProduct() {
             const response = JSON.parse(request.responseText);
 
             if (response.success) {
-                // Display the success message
+                // display success alert
                 if (confirm('Product successfully uploaded! Click OK to go back to the homepage.')) {
-                    // Redirect to index.html
+                    // go back to index.html
                     window.location.href = "index.html";
                 }
             } else {

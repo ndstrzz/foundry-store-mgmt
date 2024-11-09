@@ -1,18 +1,1 @@
-[
-  {
-    "name": "F-35 Supermaneuverable Air-Defense Fighter Aircraft",
-    "description": "A jet, yes, a jet.",
-    "price": "82.50",
-    "size": "J",
-    "id": "1730990232723560",
-    "image": "images/1730993227855.png"
-  },
-  {
-    "name": "Jeans",
-    "description": "Regular O Jeans",
-    "price": "25.00",
-    "size": "M",
-    "id": "1730996194364171",
-    "image": "images/1730996194357.png"
-  }
-]
+[{"name":"jeans","description":"Regular O Jeans","price":"25.00","size":"M","id":"1730996194364171","image":"images/1730996194357.png"},{"name":"chinese word","description":"china","price":"24.00","size":"S","id":"1731127713717638","image":"images/1731127713711.png"},{"name":"monke","description":"monek","price":"1.00","size":"XL","id":"1731131191646181","image":"images/1731131191637.png"}]
