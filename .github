@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: "npm" # or "yarn" if you're using Yarn
-    directory: "/" # Location of your package.json or dependencies file
+  - package-ecosystem: "npm"           
+    directory: "/"                   
     schedule:
-      interval: "weekly" # You can set this to "daily" or "monthly"
+      interval: "weekly"               
