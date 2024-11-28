@@ -1,4 +1,3 @@
-const { request } = require('http');
 const { Product } = require('../models/Products');
 const fs = require('fs').promises;
 const path = require('path');
@@ -28,33 +27,41 @@ async function writeJSON(object, filename) {
 async function addProduct(req, res) {
     try {
         const name = req.body.name;
-        const price = parseFloat(req.body.price).toFixed(2);
+        const price = req.body.price;
         const description = req.body.description;
         const size = req.body.size;
         const image = req.file ? `images/${req.file.filename}` : null;
 
-        // validation checks
-        if (!name) return res.status(400).json({ message: 'Name is required' });
-        if (!price || isNaN(price) || price <= 0) return res.status(400).json({ message: 'Invalid price' });
-        if (!description || description.split(" ").length > 250) return res.status(400).json({ message: 'Description must be 250 words or fewer' });
-        if (!size || size.split(" ").length > 50) return res.status(400).json({ message: 'Size must be 50 words or fewer' });
-        if (!image) return res.status(400).json({ message: 'Image is required' });
+        // Validation checks
+        if (!name || !price || !description || !size || !image) {
+            return res.status(400).json({ message: 'Please fill in all the fields.' });
+        }
 
-        // creating new product which includes unique id
-        const newProduct = new Product(name, price, description, size);
-        newProduct.image = image; // image path set for product
+        if (name.length < 2) {
+            return res.status(400).json({ message: 'Name must be at least 2 characters long.' });
+        }
 
-        // saving new product to products.json
+        if (price < 0) {
+            return res.status(400).json({ message: 'Price cannot be negative.' });
+        }
+        if (description.split(' ').length > 250) {
+            return res.status(400).json({ message: 'Description must not exceed 250 words.' });
+        }
+
+        // Create new product
+        const newProduct = new Product(name, parseFloat(price).toFixed(2), description, size);
+        newProduct.image = image;
+
+        // Save to products.json
         const updatedProducts = await writeJSON(newProduct, path.join(__dirname, 'products.json'));
-        console.log("Product added successfully:", newProduct);
+        console.log('Product added successfully:', newProduct);
 
-        return res.status(201).json({ success: true, message: 'Product added successfully' });
+        return res.status(201).json({ success: true, message: 'Product added successfully.' });
     } catch (error) {
-        console.error("Error in addProduct:", error);
+        console.error('Error in addProduct:', error);
         return res.status(500).json({ message: error.message });
     }
 }
-
 
 module.exports = {
     readJSON,
