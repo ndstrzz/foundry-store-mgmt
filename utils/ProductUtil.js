@@ -36,29 +36,16 @@ async function addProduct(req, res) {
         if (!name || !price || !description || !size || !image) {
             return res.status(400).json({ message: 'Please fill in all the fields.' });
         }
-        if (!name) {
-            return res.status(400).json({ message: 'Name is required.' });
-        }
+
         if (name.length < 2) {
             return res.status(400).json({ message: 'Name must be at least 2 characters long.' });
         }
-        if (!price) {
-            return res.status(400).json({ message: 'Price is required.' });
-        }
+
         if (price < 0) {
             return res.status(400).json({ message: 'Price cannot be negative.' });
         }
-        if (!description) {
-            return res.status(400).json({ message: 'Description is required.' });
-        }
-        if (description.split(" ").length > 250) {
+        if (description.split(' ').length > 250) {
             return res.status(400).json({ message: 'Description must not exceed 250 words.' });
-        }
-        if (!size) {
-            return res.status(400).json({ message: 'Size & Fit information is required.' });
-        }
-        if (!image) {
-            return res.status(400).json({ message: 'Image is required.' });
         }
 
         // Create new product
@@ -67,11 +54,11 @@ async function addProduct(req, res) {
 
         // Save to products.json
         const updatedProducts = await writeJSON(newProduct, path.join(__dirname, 'products.json'));
-        console.log("Product added successfully:", newProduct);
+        console.log('Product added successfully:', newProduct);
 
         return res.status(201).json({ success: true, message: 'Product added successfully.' });
     } catch (error) {
-        console.error("Error in addProduct:", error);
+        console.error('Error in addProduct:', error);
         return res.status(500).json({ message: error.message });
     }
 }

@@ -1,40 +1,49 @@
 const express = require('express');
-const bodyParser = require("body-parser");
 const multer = require('multer');
+const fs = require('fs');
 const path = require('path');
 const app = express();
 
 const PORT = process.env.PORT || 5050;
 const startPage = "index.html";
 
-// configure multer storage for file uploads
+// Ensure `public/images` directory exists
+if (!fs.existsSync('public/images')) {
+    fs.mkdirSync('public/images', { recursive: true });
+}
+
+// Configure multer storage for file uploads
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'public/images'); // ensuring this directory exists
+        cb(null, 'public/images'); // Save files to `public/images`
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname)); // generate unique filename
+        cb(null, Date.now() + path.extname(file.originalname)); // Generate unique filename
     }
 });
 const upload = multer({ storage: storage });
 
-// setting up body parsers
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(express.static("./public"));
+// Set up body parsers
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("./public")); // Serve static files
 
-// import functions from ProductUtil.js, getProductUtil.js, ReviewUtil.js, and editProductUtil.js
+// Import utility functions
 const { addProduct, readJSON } = require('./utils/ProductUtil');
 const { getProducts } = require('./utils/getProductUtil');
 const { getAllReviews, getReviewsByProductId, saveReview } = require('./utils/ReviewUtil');
 const { editProduct } = require('./utils/editProductUtil');
 
-// product routes
-app.post('/add-product', upload.single('image'), addProduct);
+// Product routes
+app.post('/add-product', upload.single('image'), (req, res) => {
+    console.log('Uploaded File:', req.file);
+    console.log('Request Body:', req.body);
+    addProduct(req, res);
+});
 app.get('/get-products', getProducts);
 app.put('/edit-product/:id', upload.single('image'), editProduct);
 
-// endpoint to get individual product details by id
+// Endpoint to get individual product details by id
 app.get('/get-product', async (req, res) => {
     const productId = req.query.id;
     try {
@@ -50,7 +59,7 @@ app.get('/get-product', async (req, res) => {
     }
 });
 
-// GET route to fetch all reviews for specific product
+// Review routes
 app.get('/api/reviews/:productId', (req, res) => {
     const productId = parseInt(req.params.productId);
     try {
@@ -62,7 +71,6 @@ app.get('/api/reviews/:productId', (req, res) => {
     }
 });
 
-// POST route to add new review for specific product
 app.post('/api/reviews/:productId', (req, res) => {
     const productId = parseInt(req.params.productId);
     const newReview = {
@@ -80,16 +88,16 @@ app.post('/api/reviews/:productId', (req, res) => {
     }
 });
 
-// default route for homepage
+// Default route for homepage
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
 });
 
-// starting server (node index.js)
-const server = app.listen(PORT, function () {
-    const address = server.address();
-    const baseUrl = `http://${address.address === "::" ? 'localhost' : address.address}:${address.port}`;
-    console.log(`Demo project at: ${baseUrl}`);
+// Start server
+const server = app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+}).on('error', (err) => {
+    console.error('Failed to start server:', err);
 });
 
 module.exports = { app, server };

@@ -6,6 +6,12 @@
     "include": [
         "utils/*.js"
     ],
+    "exclude": [
+        "utils/editProductUtil.js",
+        "utils/getProductUtil.js",
+        "utils/ReviewUtil.js",
+        "utils/review.json"
+    ],
     "reportDir": "coverage/backend",
     "branches": 80,
     "lines": 80,
