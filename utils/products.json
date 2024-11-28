@@ -1,1 +1,58 @@
-[{"name":"Long Jeans","description":"Regular Jeans","price":"25.00","size":"S, M, L, XL","id":"1730996194364171","image":"images/1730996194357.png"},{"name":"Oversized Sweater","description":"cut from twill that's garment-dyed to create a cool, faded effect. \r\nThey're designed with straight legs and sit low on the waist to accentuate \r\nthe laidback feel. Pair yours with a tank or oversized sweater.","price":"58.00","size":"XS, S, M, L, XL, XXL","id":"1731135782680240","image":"images/1731135782645.jpg"}]
+[
+  {
+    "name": "Long Jeans",
+    "description": "Regular Jeans",
+    "price": "25.00",
+    "size": "S, M, L, XL",
+    "id": "1730996194364171",
+    "image": "images/1730996194357.png"
+  },
+  {
+    "name": "Oversized Sweater",
+    "description": "cut from twill that's garment-dyed to create a cool, faded effect. \r\nThey're designed with straight legs and sit low on the waist to accentuate \r\nthe laidback feel. Pair yours with a tank or oversized sweater.",
+    "price": "58.00",
+    "size": "XS, S, M, L, XL, XXL",
+    "id": "1731135782680240",
+    "image": "images/1731135782645.jpg"
+  },
+  {
+    "name": "Long Jeans",
+    "description": "Andyss",
+    "price": "68.00",
+    "size": "M",
+    "id": "1732769931321872",
+    "image": "images/1732769931317.png"
+  },
+  {
+    "name": "Andy",
+    "description": "yt",
+    "price": "68.00",
+    "size": "M",
+    "id": "1732770338681007",
+    "image": "images/1732770338677.png"
+  },
+  {
+    "name": "Andy the skibidi",
+    "description": "sf",
+    "price": "-9.00",
+    "size": "ss",
+    "id": "1732771173830975",
+    "image": "images/1732771173828.png"
+  },
+  {
+    "name": "dsf",
+    "description": "dsf",
+    "price": "-9.00",
+    "size": "d",
+    "id": "1732771197024875",
+    "image": "images/1732771197022.png"
+  },
+  {
+    "name": "nd",
+    "description": "sdferihhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh wreuigh euiptweruip gruqeigpuqe gp9erh gp9uqwhgpi hgpuewhgp9uqhgpe hgp9ueh fiuer hgpehfperuihpehpoeri oewuif[9e whf9ewrh p9erh foqewh fpqew9hfpqhfp9rf her9pf herp9i feqr9hf e ru9p perh wqe9hf e",
+    "price": "9.00",
+    "size": "dsf",
+    "id": "1732771255251612",
+    "image": "images/1732771255247.png"
+  }
+]
