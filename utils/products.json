@@ -182,5 +182,13 @@
     "size": "L",
     "id": "1732776588281598",
     "image": "images/1732776588278.jpg"
+  },
+  {
+    "name": "Test Product",
+    "description": "This is a valid product description.",
+    "price": "100.00",
+    "size": "L",
+    "id": "1732776836117674",
+    "image": "images/1732776836114.jpg"
   }
 ]

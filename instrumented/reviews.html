@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Reviews</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="getReviews();">
+
+    <a id="backButton" href="#" class="back-button">
+        <img src="images/back-icon.png" alt="Back Icon">
+    </a>
+
+    <div class="review-page-container">
+        <!-- right Column containing reviews and review form -->
+        <div class="review-section">
+            <h3>Reviews</h3>
+            <div id="reviewsContainer" class="reviews-container">
+                <!-- reviews added and scrollable -->
+            </div>
+        </div>
+
+        <!-- section for review form -->
+        <div class="review-form-section">
+            <h4>Write a review</h4>
+            <form id="reviewForm">
+                <textarea id="reviewText" placeholder="Write your review here..." required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/add-get-review.js"></script>
+</body>
+</html>
