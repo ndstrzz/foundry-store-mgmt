@@ -33,6 +33,11 @@ async function addProduct(req, res) {
         const image = req.file ? `images/${req.file.filename}` : null;
 
         // Validation checks
+
+        if (!name) {
+            return res.status(400).json({ message: 'Name is required.' });
+          }
+          
         if (!name || !price || !description || !size || !image) {
             return res.status(400).json({ message: 'Please fill in all the fields.' });
         }

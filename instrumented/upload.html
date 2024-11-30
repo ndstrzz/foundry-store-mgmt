@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Product - Foundry</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="upload-body">
+    <a href="index.html" class="upload-back-button">
+        <img src="images/back-icon.png" alt="Back Icon">
+    </a>
+
+    <!-- upload page container -->
+    <div class="upload-container">
+        <!-- Left Section containing product icon -->
+        <div class="icon-section">
+            <label for="image-upload" style="cursor: pointer;">
+                <img src="images/product-icon.png" alt="Product Icon" class="product-icon" id="image-preview">
+            </label>
+            <input type="file" id="image-upload" style="display: none;" accept="image/*" onchange="previewImage(event)">
+        </div>
+        
+        <!-- right section containing form -->
+        <div class="form-section">
+            <h4>Product name</h4>
+            <input type="text" id="name" class="form-control mb-3" placeholder="Enter product name">
+
+            <h4>Price</h4>
+            <input type="number" id="price" class="form-control mb-3" placeholder="Enter product price">
+
+            <h4>Description</h4>
+            <textarea id="description" class="form-control mb-3" placeholder="Enter product description" maxlength="250"></textarea>
+
+            <h4>Size & fit</h4>
+            <input type="text" id="size" class="form-control mb-3" placeholder="Enter size and fit details" maxlength="50">
+
+            <button type="button" class="btn upload-button" onclick="addProduct()">Upload</button>
+        </div>
+    </div>
+
+    <!-- popup notification -->
+    <div id="popup-notification" class="popup">
+        <div class="popup-content">
+            <p>Product uploaded successfully!</p>
+            <button onclick="closePopup()">Okay</button>
+        </div>
+    </div>
+
+    <script src="js/post-product.js"></script>
+</body>
+</html>

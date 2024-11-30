@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundry Homepage</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="getProducts()">
+    <!-- header section -->
+    <header class="header">
+        <div style="position: relative;"> <!-- wrapper with positioning -->
+            <input type="text" placeholder="Search..." class="search-bar" oninput="searchProducts(this.value)">
+            <div class="search-results" id="searchResults"></div> <!-- container for search results -->
+        </div>
+        <a href="upload.html">
+            <img src="images/product-icon.png" alt="Upload Icon" class="upload-icon">
+        </a>
+    </header>
+
+    <!-- hero section -->
+    <section class="hero-section">
+        <!-- add content or background image for hero section -->
+    </section>
+
+    <!-- product section with grid layout -->
+    <section class="product-section">
+        <div class="product-grid" id="productGrid">
+            <!-- products added here using javascript -->
+        </div>
+    </section>
+
+    <script src="js/get-product.js"></script>
+    <script src="js/get-search_bar.js"></script>
+</body>
+</html>

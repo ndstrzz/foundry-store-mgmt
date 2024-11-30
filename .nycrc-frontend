@@ -1,0 +1,23 @@
+{
+  "reporter": [
+    "text",
+    "html"
+  ],
+  "include": [
+    "public/js/**/*.js"
+  ],
+  "exclude": [
+    "public/js/add-get-review.js",
+    "public/js/edit-product.js",
+    "public/js/get-product.js",
+    "public/js/get-review.js",
+    "public/js/get-product-details.js",
+    "public/js/get-search_bar.js"
+  ],
+  "reportDir": "coverage/frontend",
+  "check-coverage": true,
+  "branches": 80,
+  "lines": 80,
+  "functions": 80,
+  "statements": 80
+}
