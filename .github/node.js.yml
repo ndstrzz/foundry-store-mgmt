@@ -1,4 +1,4 @@
-name: Automatic Testing for Resource Management Web App
+name: Automatic Testing for Foundry Management Web App
 
 on:
   push:
