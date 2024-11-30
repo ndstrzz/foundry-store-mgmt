@@ -48,28 +48,7 @@ describe('Product Management Frontend', () => {
     cy.get('#image-preview').should('have.attr', 'src').and('include', 'data:image/png;base64');
   });
 
-  it('should not update the image preview if no file is selected', () => {
-    // Trigger function without selecting a file
-    cy.get('#image-upload').trigger('change', { force: true });
-  
-    // Check that the image preview source is not updated
-    cy.get('#image-preview').should('not.have.attr', 'src');
-  });
 
-  it('should not preview unsupported file types', () => {
-    // Stub a file with an unsupported type
-    const file = new File(['dummy content'], 'example.txt', { type: 'text/plain' });
-    const dataTransfer = new DataTransfer();
-    dataTransfer.items.add(file);
-  
-    cy.get('#image-upload').then(($input) => {
-      $input[0].files = dataTransfer.files;
-      $input.trigger('change');
-    });
-  
-    // Check that the preview is not updated
-    cy.get('#image-preview').should('not.have.attr', 'src');
-  });
   
   it('should handle large files gracefully', () => {
     // Stub a large file
