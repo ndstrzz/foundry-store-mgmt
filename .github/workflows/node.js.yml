@@ -20,11 +20,15 @@ jobs:
       with:
         node-version: 18
 
-    # Step 3: Install Cypress dependencies
-    - name: Install Cypress dependencies
-      run: npm install cypress
+    # Step 3: Install dependencies
+    - name: Install dependencies based on package.json
+      run: npm install
 
-    # Step 4: Cache Cypress binary
+    # Step 4: Install Cypress binary explicitly
+    - name: Install Cypress binary
+      run: npx cypress install
+
+    # Step 5: Cache Cypress binary to speed up future builds
     - name: Cache Cypress binary
       uses: actions/cache@v3
       with:
@@ -33,22 +37,14 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-cypress-
 
-    # Step 5: Install other dependencies
-    - name: Install dependencies based on package.json
-      run: npm install
-
-    # Step 6: Ensure all binaries in node_modules/.bin are executable
-    - name: Ensure binaries in node_modules/.bin are executable
-      run: chmod +x ./node_modules/.bin/*
-
-    # Step 7: Run backend tests with coverage
+    # Step 6: Run backend tests with coverage
     - name: Run backend tests
       run: npx nyc --nycrc-path .nycrc-backend mocha
 
-    # Step 8: Instrument frontend code for coverage
+    # Step 7: Instrument frontend code for coverage
     - name: Instrument frontend code
       run: npx nyc instrument ./public ./instrumented
 
-    # Step 9: Run frontend tests with coverage
+    # Step 8: Run frontend tests with Cypress
     - name: Run frontend tests
       run: npx cypress run --config-file cypress.json
