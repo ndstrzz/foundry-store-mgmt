@@ -51,4 +51,7 @@ jobs:
         uses: slackapi/slack-github-action@v1.23.0
         with:
           channel-id: your-channel-id
-          text: "Tests failed on ${{ github.ref_name }}. Check the logs for more details."
+          slack-message: |
+            :x: Tests failed on branch ${{ github.ref_name }}.
+            Please check the workflow run for details: ${{ github.run_url }}.
+          botToken: ${{ secrets.SLACK_BOT_TOKEN }}
