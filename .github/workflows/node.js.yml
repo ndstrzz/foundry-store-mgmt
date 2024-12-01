@@ -4,19 +4,51 @@ on:
   push:
     branches:
       - main
+
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-    ...
-    - name: Run tests in "tests" folder
-      run: npm run backend-test
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Instrument the frontend code
-      run: cp -R public instrumented & npx nyc instrument public instrumented
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-    - name: Run the frontend test cases
-      run:  rm -rf .nyc_output & npx nyc --nycrc-path .nycrc-frontend cypress run
-    
-    
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Linter
+        run: npm run lint
+
+      - name: Run tests in "tests" folder
+        run: npm run backend-test
+
+      - name: Instrument the frontend code
+        run: |
+          cp -R public instrumented
+          npx nyc instrument public instrumented
+
+      - name: Run the frontend test cases
+        run: |
+          rm -rf .nyc_output
+          npx nyc --nycrc-path .nycrc-frontend cypress run --browser chrome
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage/
+
+      - name: Notify on failure
+        if: failure()
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          channel-id: your-channel-id
+          text: "Tests failed on ${{ github.ref_name }}. Check the logs for more details."
