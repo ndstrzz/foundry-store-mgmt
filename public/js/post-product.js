@@ -9,18 +9,49 @@ function previewImage(event) {
 }
 
 function addProduct() {
+    const name = document.getElementById("name").value.trim();
+    const price = document.getElementById("price").value.trim();
+    const description = document.getElementById("description").value.trim();
+    const size = document.getElementById("size").value.trim();
     const imageFile = document.getElementById("image-upload").files[0];
+
+    // Validation checks in specific order
+    if (!name) {
+        alert("Unable to add product: Name is required.");
+        return;
+    }
+
+    if (!price) {
+        alert("Price is required.");
+        return;
+    }
+
+    if (!description) {
+        alert("Please fill in all the fields.");
+        return;
+    }
+
+    if (!size) {
+        alert("Please fill in all the fields.");
+        return;
+    }
 
     if (!imageFile) {
         alert("Please select an image for the product.");
         return;
     }
-    
+
+    // Additional validations
+    if (description.length > 250) {
+        alert("Description must not exceed 250 characters.");
+        return;
+    }
+
     const formData = new FormData();
-    formData.append("name", document.getElementById("name").value);
-    formData.append("price", parseFloat(document.getElementById("price").value).toFixed(2));
-    formData.append("description", document.getElementById("description").value);
-    formData.append("size", document.getElementById("size").value);
+    formData.append("name", name);
+    formData.append("price", parseFloat(price).toFixed(2));
+    formData.append("description", description);
+    formData.append("size", size);
     formData.append("image", imageFile);
     
     const request = new XMLHttpRequest();
@@ -31,9 +62,7 @@ function addProduct() {
             const response = JSON.parse(request.responseText);
 
             if (response.success) {
-                // display success alert
                 if (confirm('Product successfully uploaded! Click OK to go back to the homepage.')) {
-                    // go back to index.html
                     window.location.href = "index.html";
                 }
             } else {
