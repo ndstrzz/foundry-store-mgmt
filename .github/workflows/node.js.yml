@@ -32,6 +32,14 @@ jobs:
     - name: Ensure binaries in node_modules/.bin are executable
       run: chmod +x ./node_modules/.bin/*
 
-    # Step 6: Run tests using `npx`
-    - name: Run tests in "tests" folder
+    # Step 6: Run backend tests with coverage
+    - name: Run backend tests
       run: npx nyc --nycrc-path .nycrc-backend mocha
+
+    # Step 7: Instrument frontend code for coverage (if needed)
+    - name: Instrument frontend code
+      run: npx nyc instrument ./src ./instrumented
+
+    # Step 8: Run frontend tests with coverage
+    - name: Run frontend tests
+      run: npx cypress run --config-file cypress.json
