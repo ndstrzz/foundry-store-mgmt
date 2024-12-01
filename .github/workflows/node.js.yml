@@ -13,7 +13,7 @@ jobs:
     # Step 1: Checkout code from GitHub repository
     - name: Checkout code from GitHub Repo
       uses: actions/checkout@v3
-      
+
     # Step 2: Setup Node.js environment
     - name: Setup Node.js in Ubuntu
       uses: actions/setup-node@v3
@@ -32,7 +32,7 @@ jobs:
     - name: Install Cypress binary
       run: npx cypress install
 
-    # Step 6: Cache Cypress binary to speed up future builds
+    # Step 6: Cache Cypress binary
     - name: Cache Cypress binary
       uses: actions/cache@v3
       with:
@@ -41,14 +41,14 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-cypress-
 
-    # Step 7: Run backend tests with coverage
+    # Step 7: Run backend tests
     - name: Run backend tests
       run: npx nyc --nycrc-path .nycrc-backend mocha
 
-    # Step 8: Instrument frontend code for coverage
+    # Step 8: Instrument frontend code
     - name: Instrument frontend code
       run: npx nyc instrument ./public ./instrumented
 
-    # Step 9: Run frontend tests with Cypress
+    # Step 9: Run frontend tests using updated config
     - name: Run frontend tests
-      run: npx cypress run --config-file cypress.json
+      run: npx cypress run --config-file cypress.config.js
