@@ -28,9 +28,9 @@ jobs:
     - name: Install dependencies based on package.json
       run: npm install
 
-    # Step 5: Ensure `nyc` is executable
-    - name: Ensure nyc is executable
-      run: chmod +x ./node_modules/.bin/nyc
+    # Step 5: Ensure all binaries in node_modules/.bin are executable
+    - name: Ensure binaries in node_modules/.bin are executable
+      run: chmod +x ./node_modules/.bin/*
 
     # Step 6: Run tests using `npx`
     - name: Run tests in "tests" folder
