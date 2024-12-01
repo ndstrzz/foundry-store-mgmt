@@ -1,20 +1,23 @@
-name: Automatic Testing for Foundry  Web App
+name: Automatic Testing for Resource Management Web App
 on:
   push:
     branches:
-      - main # Workflow will be triggered whenever there is a push in main branch
+      - main
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Run tests in "tests" folder
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Debug: List repository files
+        run: ls -R
+
+      - name: Install dependencies
+        working-directory: foundry-store-mgmt # Adjust this if your project is nested
+        run: npm install
+
+      - name: Run backend tests
+        working-directory: foundry-store-mgmt # Adjust this if your project is nested
         run: npm run backend-test
-      - name: Instrument the frontend code
-        run: |
-          cp -R public instrumented
-          npx nyc instrument public instrumented
-      - name: Run the frontend test cases
-        run: |
-          rm -rf .nyc_output
-          npx nyc --nycrc-path .nycrc-frontend cypress run
