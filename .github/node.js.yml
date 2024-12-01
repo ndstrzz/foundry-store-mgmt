@@ -1,4 +1,4 @@
-name: Automatic Testing for Foundry Management Web App
+name: Automatic Testing for Foundry  Web App
 on:
   push:
     branches:
