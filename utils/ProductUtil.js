@@ -32,25 +32,30 @@ async function addProduct(req, res) {
         const size = req.body.size;
         const image = req.file ? `images/${req.file.filename}` : null;
 
-        // Validation checks
-
+        // Specific validation checks
         if (!name) {
             return res.status(400).json({ message: 'Name is required.' });
-          }
-          
-        if (!name || !price || !description || !size || !image) {
-            return res.status(400).json({ message: 'Please fill in all the fields.' });
         }
-
         if (name.length < 2) {
             return res.status(400).json({ message: 'Name must be at least 2 characters long.' });
         }
-
+        if (!price) {
+            return res.status(400).json({ message: 'Price is required.' });
+        }
         if (price < 0) {
             return res.status(400).json({ message: 'Price cannot be negative.' });
         }
+        if (!description) {
+            return res.status(400).json({ message: 'Description is required.' });
+        }
         if (description.split(' ').length > 250) {
             return res.status(400).json({ message: 'Description must not exceed 250 words.' });
+        }
+        if (!size) {
+            return res.status(400).json({ message: 'Size & Fit information is required.' });
+        }
+        if (!image) {
+            return res.status(400).json({ message: 'Image is required.' });
         }
 
         // Create new product
