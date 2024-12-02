@@ -25,7 +25,7 @@ describe('Product API', () => {
     });
 
     describe('POST /add-product', () => {
-        it('should return 400 if name is empty', (done) => {
+        it('when the product name field is empty, error message will be sent', (done) => {
             chai.request(baseUrl)
                 .post('/add-product')
                 .field('name', '') // Empty name
@@ -40,7 +40,7 @@ describe('Product API', () => {
                 });
         });
 
-        it('should return 400 if name is less than 2 characters long', (done) => {
+        it('when the product name field is less than 2 characters, error message will be sent', (done) => {
             chai.request(baseUrl)
                 .post('/add-product')
                 .field('name', 'A')  // Name with only 1 character
@@ -56,7 +56,7 @@ describe('Product API', () => {
         });
 
 
-        it('should return 400 if description is empty', (done) => {
+        it('when the description field is empty, error message will be sent', (done) => {
             chai.request(baseUrl)
                 .post('/add-product')
                 .field('name', 'Valid Name')
@@ -71,7 +71,7 @@ describe('Product API', () => {
                 });
         });
 
-        it('should return 400 if description exceeds 250 words', (done) => {
+        it('when description field exceeds 250 words, error message will be sent ', (done) => {
             const longDescription = 'word '.repeat(251); // Generate 251 words
 
             chai.request(baseUrl)
@@ -89,7 +89,7 @@ describe('Product API', () => {
         });
         
 
-        it('should return 400 if size is empty', (done) => {
+        it('when size field is empty, error message will be sent', (done) => {
             chai.request(baseUrl)
                 .post('/add-product')
                 .field('name', 'Valid Name')
@@ -104,7 +104,7 @@ describe('Product API', () => {
                 });
         });
 
-        it('should return 400 if image is not uploaded', (done) => {
+        it('when image field is empty, error message will be sent', (done) => {
             chai.request(baseUrl)
                 .post('/add-product')
                 .field('name', 'Valid Name')
@@ -119,7 +119,7 @@ describe('Product API', () => {
                 });
         });
 
-        it('should return 400 if price is empty', (done) => {
+        it('when price field is empty, error message will be sent', (done) => {
             chai.request(baseUrl)
                 .post('/add-product')
                 .field('name', 'Valid Name')
@@ -134,7 +134,7 @@ describe('Product API', () => {
                 });
         });
         
-        it('should return 400 if price is negative number', (done) => {
+        it('when price field is a negative number, error message will be sent', (done) => {
             chai.request(baseUrl)
                 .post('/add-product')
                 .field('name', 'Valid Name')
@@ -149,7 +149,7 @@ describe('Product API', () => {
                 });
         });
 
-        it('should add a new product successfully', (done) => {
+        it('Adding a new product successfully', (done) => {
             chai.request(baseUrl)
                 .post('/add-product')
                 .field('name', 'Test Product')

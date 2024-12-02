@@ -350,5 +350,37 @@
     "size": "L",
     "id": "1733134508310118",
     "image": "images/1733134508305.jpg"
+  },
+  {
+    "name": "Test Product",
+    "description": "This is a valid product description.",
+    "price": "100.00",
+    "size": "L",
+    "id": "1733136856542366",
+    "image": "images/1733136856539.jpg"
+  },
+  {
+    "name": "Test Product",
+    "description": "This is a valid product description.",
+    "price": "100.00",
+    "size": "L",
+    "id": "1733140653230136",
+    "image": "images/1733140653227.jpg"
+  },
+  {
+    "name": "Valid Product",
+    "description": "This is a valid description.",
+    "price": "100.00",
+    "size": "L",
+    "id": "1733141158677673",
+    "image": "images/1733141158670.jpg"
+  },
+  {
+    "name": "Test Product",
+    "description": "This is a valid product description.",
+    "price": "100.00",
+    "size": "L",
+    "id": "1733141162271765",
+    "image": "images/1733141162269.jpg"
   }
 ]

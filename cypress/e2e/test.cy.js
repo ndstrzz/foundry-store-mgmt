@@ -37,7 +37,7 @@ describe('Product Management Frontend', () => {
 
 
   
-  it('should handle large files gracefully', () => {
+  it('should handle large files without crashing', () => {
     // Stub a large file
     const largeFile = new File([new ArrayBuffer(10 * 1024 * 1024)], 'large-file.png', { type: 'image/png' });
     const dataTransfer = new DataTransfer();
