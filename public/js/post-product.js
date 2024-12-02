@@ -1,4 +1,4 @@
-// function to preview selected image
+// Function to preview selected image
 function previewImage(event) {
     const reader = new FileReader();
     reader.onload = function () {
@@ -6,7 +6,7 @@ function previewImage(event) {
         imagePreview.src = reader.result;
     };
     reader.readAsDataURL(event.target.files[0]);
-}
+  }
 
 function addProduct() {
     const name = document.getElementById("name").value.trim();
@@ -41,42 +41,39 @@ function addProduct() {
         return;
     }
 
-    // Additional validations
-    if (description.length > 250) {
-        alert("Description must not exceed 250 characters.");
+    if (name.length < 2) {
+        alert("Name must be at least 2 characters long");
         return;
     }
 
+    if (price < 0) {
+        alert("Price cannot be negative");
+        return;
+    }
+
+
+    // Proceed with form submission logic (e.g., AJAX POST request)
     const formData = new FormData();
-    formData.append("name", name);
-    formData.append("price", parseFloat(price).toFixed(2));
-    formData.append("description", description);
-    formData.append("size", size);
-    formData.append("image", imageFile);
-    
-    const request = new XMLHttpRequest();
-    request.open("POST", "/add-product", true);
+    formData.append('name', name);
+    formData.append('price', price);
+    formData.append('description', description);
+    formData.append('size', size);
+    formData.append('image', imageFile);
 
-    request.onload = function () {
-        try {
-            const response = JSON.parse(request.responseText);
-
-            if (response.success) {
-                if (confirm('Product successfully uploaded! Click OK to go back to the homepage.')) {
-                    window.location.href = "index.html";
-                }
-            } else {
-                alert('Unable to add product: ' + (response.message || 'Unknown error.'));
-            }
-        } catch (e) {
-            console.error("Error parsing response:", e);
-            alert('An error occurred. Please try again.');
+    // Example of an AJAX POST request (you can adjust based on your API setup)
+    fetch('/add-product', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Product uploaded successfully!');
+        } else {
+            alert('Unable to add product: ' + (data.message || 'Unknown error.'));
         }
-    };
-
-    request.onerror = function () {
-        alert('An error occurred during the upload. Please check your connection and try again.');
-    };
-
-    request.send(formData);
+    })
+    .catch((error) => {
+        alert('An error occurred. Please try again.');
+    });
 }

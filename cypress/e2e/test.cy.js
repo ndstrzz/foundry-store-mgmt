@@ -19,89 +19,6 @@ describe('Product Management Frontend', () => {
   });
 
 
-  // Function to preview selected image
-function previewImage(event) {
-  const reader = new FileReader();
-  reader.onload = function () {
-      const imagePreview = document.getElementById('image-preview');
-      imagePreview.src = reader.result;
-  };
-  reader.readAsDataURL(event.target.files[0]);
-}
-
-// Function to add a product
-function addProduct() {
-  const name = document.getElementById("name").value.trim();
-  const price = document.getElementById("price").value.trim();
-  const description = document.getElementById("description").value.trim();
-  const size = document.getElementById("size").value.trim();
-  const imageFile = document.getElementById("image-upload").files[0];
-
-  if (!name) {
-      alert("Unable to add product: Name is required.");
-      return;
-  }
-
-  if (!price) {
-      alert("Price is required.");
-      return;
-  }
-
-  if (!description) {
-      alert("Please fill in all the fields.");
-      return;
-  }
-
-  if (!size) {
-      alert("Please fill in all the fields.");
-      return;
-  }
-
-  if (!imageFile) {
-      alert("Please select an image for the product.");
-      return;
-  }
-
-  if (description.length > 250) {
-      alert("Description must not exceed 250 characters.");
-      return;
-  }
-
-  const formData = new FormData();
-  formData.append("name", name);
-  formData.append("price", parseFloat(price).toFixed(2));
-  formData.append("description", description);
-  formData.append("size", size);
-  formData.append("image", imageFile);
-
-  const request = new XMLHttpRequest();
-  request.open("POST", "/add-product", true);
-
-  request.onload = function () {
-      try {
-          const response = JSON.parse(request.responseText);
-
-          if (response.success) {
-              if (confirm('Product successfully uploaded! Click OK to go back to the homepage.')) {
-                  window.location.href = "index.html";
-              }
-          } else {
-              alert('Unable to add product: ' + (response.message || 'Unknown error.'));
-          }
-      } catch (e) {
-          console.error("Error parsing response:", e);
-          alert('An error occurred. Please try again.');
-      }
-  };
-
-  request.onerror = function () {
-      alert('An error occurred during the upload. Please check your connection and try again.');
-  };
-
-  request.send(formData);
-}
-
-
   it('should display a preview of the selected image', () => {
     // Stub a file input
     const file = new File(['dummy content'], 'example.png', { type: 'image/png' });
@@ -136,7 +53,21 @@ function addProduct() {
   });
   
   
+  it('should show an error when the name field is empty', () => {
+    cy.get('#price').type('100.00');
+    cy.get('#description').type('Valid description.');
+    cy.get('#size').type('M');
+    cy.get('#image-upload').attachFile('test-image.jpg', { subjectType: 'drag-n-drop' });
+    cy.get('.upload-button').click();
   
+    cy.on('window:alert', (alertText) => {
+      expect(alertText).to.equal('Unable to add product: Name is required.');
+    });
+  });
+
+
+  
+
 
   it('should show an error when the price field is empty', () => {
     cy.get('#name').type('Valid Name');
@@ -161,6 +92,7 @@ function addProduct() {
         expect(alertText).to.equal('Please fill in all the fields.');
     });
 });
+
 
 it('should show an error when the size field is empty', () => {
     cy.get('#name').type('Valid Name');
@@ -198,7 +130,7 @@ it('should show an error when no image is uploaded', () => {
       expect(alertText).to.equal('Product uploaded successfully!');
     });
   });
-
+  
   it('should show an error when the name is less than 2 characters', () => {
     cy.get('#name').type('A');
     cy.get('#price').type('25.00');
@@ -227,19 +159,6 @@ it('should show an error when no image is uploaded', () => {
   });
   
 
-  it('should show an error when the description exceeds 250 words', () => {
-    const longDescription = 'word '.repeat(251); // Generate a string with 251 words
-    cy.get('#name').type('Valid Name');
-    cy.get('#price').type('50.00');
-    cy.get('#description').type(longDescription);
-    cy.get('#size').type('M');
-    cy.get('#image-upload').attachFile('test-image.jpg', { subjectType: 'drag-n-drop' });
-    cy.get('.upload-button').click();
-
-    cy.on('window:alert', (alertText) => {
-      expect(alertText).to.equal('Description must not exceed 250 words.');
-    });
-  });
 
   it('should successfully add a new product', () => {
     cy.get('#name').type('Test Product');
@@ -250,9 +169,10 @@ it('should show an error when no image is uploaded', () => {
     cy.get('.upload-button').click();
 
     cy.on('window:alert', (alertText) => {
-      expect(alertText).to.equal('Product uploaded successfully!');
+        expect(alertText).to.equal('Product uploaded successfully!');
     });
-  });
+});
+
 
   it('should handle malformed JSON response gracefully', () => {
     // Stub server response with malformed JSON

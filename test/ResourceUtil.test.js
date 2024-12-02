@@ -40,6 +40,22 @@ describe('Product API', () => {
                 });
         });
 
+        it('should return 400 if name is less than 2 characters long', (done) => {
+            chai.request(baseUrl)
+                .post('/add-product')
+                .field('name', 'A')  // Name with only 1 character
+                .field('price', '50.00')
+                .field('description', 'A valid description.')
+                .field('size', 'L')
+                .attach('image', fs.readFileSync(path.join(__dirname, 'test-image.jpg')), 'test-image.jpg') // Simulate file upload
+                .end((err, res) => {
+                    expect(res).to.have.status(400);
+                    expect(res.body.message).to.equal('Name must be at least 2 characters long.');
+                    done();
+                });
+        });
+
+
         it('should return 400 if description is empty', (done) => {
             chai.request(baseUrl)
                 .post('/add-product')
@@ -54,6 +70,24 @@ describe('Product API', () => {
                     done();
                 });
         });
+
+        it('should return 400 if description exceeds 250 words', (done) => {
+            const longDescription = 'word '.repeat(251); // Generate 251 words
+
+            chai.request(baseUrl)
+                .post('/add-product')
+                .field('name', 'Valid Name')
+                .field('price', '50.00')
+                .field('description', longDescription)  // Description with more than 250 words
+                .field('size', 'L')
+                .attach('image', fs.readFileSync(path.join(__dirname, 'test-image.jpg')), 'test-image.jpg') // Simulate file upload
+                .end((err, res) => {
+                    expect(res).to.have.status(400);
+                    expect(res.body.message).to.equal('Description must not exceed 250 words.');
+                    done();
+                });
+        });
+        
 
         it('should return 400 if size is empty', (done) => {
             chai.request(baseUrl)
@@ -99,6 +133,21 @@ describe('Product API', () => {
                     done();
                 });
         });
+        
+        it('should return 400 if price is negative number', (done) => {
+            chai.request(baseUrl)
+                .post('/add-product')
+                .field('name', 'Valid Name')
+                .field('price', '-10') // Negative Price Number
+                .field('description', 'A valid description.')
+                .field('size', 'M')
+                .attach('image', fs.readFileSync(path.join(__dirname, 'test-image.jpg')), 'test-image.jpg') // Simulate file upload
+                .end((err, res) => {
+                    expect(res).to.have.status(400);
+                    expect(res.body.message).to.equal('Price cannot be negative.');
+                    done();
+                });
+        });
 
         it('should add a new product successfully', (done) => {
             chai.request(baseUrl)
@@ -114,5 +163,7 @@ describe('Product API', () => {
                     done();
                 });
         });
+
+        
     });
 });

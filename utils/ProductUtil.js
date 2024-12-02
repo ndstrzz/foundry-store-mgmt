@@ -7,8 +7,6 @@ async function readJSON(filename) {
         const data = await fs.readFile(filename, 'utf8');
         return JSON.parse(data);
     } catch (err) {
-        console.error(err);
-        throw err;
     }
 }
 
@@ -19,8 +17,6 @@ async function writeJSON(object, filename) {
         await fs.writeFile(filename, JSON.stringify(allObjects, null, 2), 'utf8');
         return allObjects;
     } catch (err) {
-        console.error(err);
-        throw err;
     }
 }
 
@@ -68,8 +64,7 @@ async function addProduct(req, res) {
 
         return res.status(201).json({ success: true, message: 'Product added successfully.' });
     } catch (error) {
-        console.error('Error in addProduct:', error);
-        return res.status(500).json({ message: error.message });
+       
     }
 }
 
