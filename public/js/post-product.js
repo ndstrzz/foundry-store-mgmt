@@ -52,28 +52,6 @@ function addProduct() {
     }
 
 
-    // Proceed with form submission logic (e.g., AJAX POST request)
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('price', price);
-    formData.append('description', description);
-    formData.append('size', size);
-    formData.append('image', imageFile);
 
-    // Example of an AJAX POST request (you can adjust based on your API setup)
-    fetch('/add-product', {
-        method: 'POST',
-        body: formData,
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Product uploaded successfully!');
-        } else {
-            alert('Unable to add product: ' + (data.message || 'Unknown error.'));
-        }
-    })
-    .catch((error) => {
-        alert('An error occurred. Please try again.');
-    });
+
 }

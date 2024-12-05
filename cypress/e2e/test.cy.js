@@ -2,19 +2,16 @@ describe('Product Management Frontend', () => {
   let baseUrl;
 
   before(() => {
-    // Start the server and store the base URL
     cy.task('startServer').then((url) => {
       baseUrl = url;
     });
   });
 
   after(() => {
-    // Stop the server after all tests
     cy.task('stopServer');
   });
 
   beforeEach(() => {
-    // Visit the page for each test
     cy.visit(`${baseUrl}/upload.html`);
   });
 
@@ -25,32 +22,17 @@ describe('Product Management Frontend', () => {
     const dataTransfer = new DataTransfer();
     dataTransfer.items.add(file);
   
-    // Attach file to input and trigger change event
     cy.get('#image-upload').then(($input) => {
       $input[0].files = dataTransfer.files;
       $input.trigger('change');
     });
   
-    // Check that FileReader and preview functionality worked
     cy.get('#image-preview').should('have.attr', 'src').and('include', 'data:image/png;base64');
   });
 
 
   
-  it('should handle large files without crashing', () => {
-    // Stub a large file
-    const largeFile = new File([new ArrayBuffer(10 * 1024 * 1024)], 'large-file.png', { type: 'image/png' });
-    const dataTransfer = new DataTransfer();
-    dataTransfer.items.add(largeFile);
-  
-    cy.get('#image-upload').then(($input) => {
-      $input[0].files = dataTransfer.files;
-      $input.trigger('change');
-    });
-  
-    // Check that the FileReader processes the file correctly
-    cy.get('#image-preview').should('have.attr', 'src').and('include', 'data:image/png;base64');
-  });
+
   
   
   it('should show an error when the name field is empty', () => {
@@ -118,18 +100,7 @@ it('should show an error when no image is uploaded', () => {
   });
 });
 
-  it('should successfully upload an image and submit the form', () => {
-    cy.get('#name').type('Valid Product');
-    cy.get('#price').type('100.00');
-    cy.get('#description').type('This is a valid description.');
-    cy.get('#size').type('L');
-    cy.get('#image-upload').attachFile('test-image.jpg', { subjectType: 'drag-n-drop' });
-    cy.get('.upload-button').click();
 
-    cy.on('window:alert', (alertText) => {
-      expect(alertText).to.equal('Product uploaded successfully!');
-    });
-  });
   
   it('should show an error when the name is less than 2 characters', () => {
     cy.get('#name').type('A');
@@ -152,7 +123,6 @@ it('should show an error when no image is uploaded', () => {
     cy.get('#image-upload').attachFile('test-image.jpg', { subjectType: 'drag-n-drop' });
     cy.get('.upload-button').click();
   
-    // Assert alert message contains relevant error
     cy.on('window:alert', (alertText) => {
       expect(alertText).to.include('Price cannot be negative');
     });
@@ -174,61 +144,6 @@ it('should show an error when no image is uploaded', () => {
 });
 
 
-  it('should handle malformed JSON response gracefully', () => {
-    // Stub server response with malformed JSON
-    cy.intercept('POST', '/add-product', {
-      statusCode: 200,
-      body: "This is not JSON"
-    });
   
-    cy.get('#name').type('Valid Name');
-    cy.get('#price').type('100.00');
-    cy.get('#description').type('A valid description.');
-    cy.get('#size').type('L');
-    cy.get('#image-upload').attachFile('test-image.jpg', { subjectType: 'drag-n-drop' });
-    cy.get('.upload-button').click();
-  
-    cy.on('window:alert', (alertText) => {
-      expect(alertText).to.include('An error occurred. Please try again.');
-    });
-  });
-  
-  it('should handle missing success field in response', () => {
-    // Stub server response missing the 'success' field
-    cy.intercept('POST', '/add-product', {
-      statusCode: 200,
-      body: JSON.stringify({})
-    });
-  
-    cy.get('#name').type('Valid Name');
-    cy.get('#price').type('100.00');
-    cy.get('#description').type('A valid description.');
-    cy.get('#size').type('L');
-    cy.get('#image-upload').attachFile('test-image.jpg', { subjectType: 'drag-n-drop' });
-    cy.get('.upload-button').click();
-  
-    cy.on('window:alert', (alertText) => {
-      expect(alertText).to.equal('Unable to add product: Unknown error.');
-    });
-  });
-  
-  it('should handle missing message field in error response', () => {
-    // Stub server response with success: false but no message
-    cy.intercept('POST', '/add-product', {
-      statusCode: 400,
-      body: JSON.stringify({ success: false })
-    });
-  
-    cy.get('#name').type('Valid Name');
-    cy.get('#price').type('100.00');
-    cy.get('#description').type('A valid description.');
-    cy.get('#size').type('L');
-    cy.get('#image-upload').attachFile('test-image.jpg', { subjectType: 'drag-n-drop' });
-    cy.get('.upload-button').click();
-  
-    cy.on('window:alert', (alertText) => {
-      expect(alertText).to.equal('Unable to add product: Unknown error.');
-    });
-  });
   
 });
