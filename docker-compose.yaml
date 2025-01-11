@@ -6,4 +6,5 @@ services:
     image: ndstrzz/rms-docker-img:latest
     container_name: rms-docker-container
     ports:
-      - "8000:5050"
+      - "8000:5050" 
+      #testing
