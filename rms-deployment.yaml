@@ -18,4 +18,4 @@ spec:
         - name: rms-container
           image: ndstrzz/rms-docker-img:latest
           ports:
-            - containerPort: 5050 # specifies the port that the application listens on
+            - containerPort: 5050 # specifies the port that the application listening on
