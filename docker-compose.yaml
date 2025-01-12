@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ndstrzz/rms-docker-img:latest
+    image: ndstrzz/rms-docker-img:vs
     container_name: rms-docker-container
     ports:
       - "8000:5050" 
