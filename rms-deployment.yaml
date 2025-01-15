@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: rms-container
-          image: ndstrzz/rms-docker-img:v1
+          image: ndstrzz/rms-docker-img:v2
           ports:
             - containerPort: 5050 # specifies the port that the application listening onn
